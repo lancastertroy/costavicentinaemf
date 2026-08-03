@@ -451,11 +451,11 @@
     document.getElementById('btn-en').setAttribute('aria-pressed', String(l === 'en'));
     try { localStorage.setItem('cvemf-lang', l); } catch (e) {}
   }
-  // Recuerda la elección; si no hay ninguna, usa el idioma del navegador.
+  // Português é sempre o idioma por omissão. Só o inglês escolhido à mão se recorda,
+  // e apenas para quem já carregou no botão EN — nunca por deteção do navegador.
   (function () {
     var saved = null;
     try { saved = localStorage.getItem('cvemf-lang'); } catch (e) {}
-    if (!saved) saved = (navigator.language || 'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
     if (saved === 'en') setLang('en');
   })();
 </script>
