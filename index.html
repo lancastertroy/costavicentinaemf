@@ -113,6 +113,30 @@
     letter-spacing:0.02em;font-size:24px;text-transform:uppercase;color:#f2f1ef;line-height:1.15;
     min-height:2.3em;text-wrap:balance}
 
+  /* ---- Edições anteriores (desplegables) ----
+     El icono es un + hecho con dos barras; al abrir, la vertical se encoge y queda un −. */
+  .ed{border-top:1px solid #dddcd8}
+  .ed:last-of-type{border-bottom:1px solid #dddcd8}
+  .ed-s{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;
+    cursor:pointer;list-style:none;font-family:'Saira Extra Condensed',sans-serif;font-weight:700;
+    letter-spacing:0.02em;text-transform:uppercase;font-size:clamp(22px,3.2vw,30px);
+    line-height:1.15;color:#1c1d1f;transition:color .2s}
+  .ed-s::-webkit-details-marker{display:none}
+  .ed-s:hover,.ed-s:focus-visible{color:#a4551a}
+  .ed-i{position:relative;flex:none;width:22px;height:22px}
+  .ed-i::before,.ed-i::after{content:"";position:absolute;left:50%;top:50%;background:currentColor}
+  .ed-i::before{width:22px;height:2px;transform:translate(-50%,-50%)}
+  .ed-i::after{width:2px;height:22px;transform:translate(-50%,-50%);transition:transform .25s ease}
+  .ed[open] .ed-i::after{transform:translate(-50%,-50%) scaleY(0)}
+  .ed-b{padding:0 0 32px;max-width:760px}
+  .ed-b p{margin:0 0 24px;font-weight:400;font-size:17px;line-height:1.55;color:#33353a;
+    text-wrap:pretty}
+  .ed-dl{display:inline-flex;align-items:center;gap:12px;padding:14px 28px;
+    font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.06em;
+    text-transform:uppercase;text-decoration:none;color:#1c1d1f;border:1px solid #1c1d1f;
+    transition:background .25s,color .25s}
+  .ed-dl:hover,.ed-dl:focus-visible{background:#1c1d1f;color:#f2f1ef}
+
   /* Botones de enlace. En móvil ocupan toda la fila para que el área de toque sea holgada. */
   .cta{display:inline-flex;align-items:center;justify-content:center;flex:1 1 240px;
     padding:16px 32px;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:15px;
@@ -655,6 +679,32 @@
       <div><dt style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:#55575c; margin-bottom:8px">Videography</dt><dd style="margin:0; font-weight:400; color:#33353a">Franco Sanguinetti</dd></div>
       <div><dt style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:#55575c; margin-bottom:8px">Social Media</dt><dd style="margin:0; font-weight:400; color:#33353a">Mayra Paolinelli</dd></div>
     </dl>
+  </div>
+</section>
+
+<!-- ============ EDIÇÕES ANTERIORES ============ -->
+<!-- <details> nativo: se abre y se cierra sin JavaScript, y los buscadores y los lectores
+     de pantalla ya entienden la estructura. Todos empiezan cerrados. -->
+<section style="background:#f2f1ef; padding:64px clamp(24px,5vw,64px)">
+  <div style="max-width:1040px; margin:0 auto">
+    <h2 class="h2xc" style="margin:0 0 32px; font-size:clamp(28px,4.2vw,40px)">
+      <span data-l="pt">Edições Anteriores</span><span data-l="en">Previous Editions</span>
+    </h2>
+
+    <details class="ed">
+      <summary class="ed-s">
+        <span><span data-l="pt">III Edição</span><span data-l="en">3rd Edition</span> | 2025</span>
+        <span class="ed-i" aria-hidden="true"></span>
+      </summary>
+      <div class="ed-b">
+        <p data-l="pt">A 3.ª edição teve lugar de 16 a 24 de agosto de 2025. O concerto de abertura aconteceu com Noa Noa Ensemble (Filipe Faria, Tiago Matias e Baltazar Molina) a 16 de agosto pelas 18:00 na Igreja (Matriz) de Nossa Senhora da Conceição, Vila do Bispo, tendo como foco a música ibérica entre a ancestralidade e contemporaneidade, com o programa “Língua”. Às 11h00, no mesmo espaço, dando lugar à aula aberta sobre instrumentos antigos de corda dedilhada, com Tiago Matias. Noa Noa Ensemble apresentou-se também a 17 de agosto pelas 16:00, na Igreja de Misericórdia de Aljezur, numa extensão da parceria com o Município de Aljezur e Santa Casa da Misericórdia de Aljezur e o apoio da CCDR I.P. COSTA VICENTINA Early Music Fest encerrou a 23/24 de agosto na Fortaleza de Sagres - Museus e Monumentos de Portugal E.P.E, num fim-de-semana dedicado ao Dia Internacional em Memória do Tráfico de Escravos e da sua Abolição. Iniciou com concerto do Ensemble AntiQuorum (Ana Sousa, Nuno de Mendonça Raimundo et al) dia 23 de agosto, 17:00, apostando na música ibérica da época da expansão marítima e terminou dia 24 de agosto, domingo, com uma oficina/performance dirigida por Ana Celorico Machado pelas 14:00 e uma palestra de Nuno de Mendonça Raimundo (CESEM) pelas 16:00, encerrando assim a 3.ª Edição.</p>
+        <p data-l="en">From 16 to 24 August 2025, the Costa Vicentina hosted the 3rd edition of the Costa Vicentina Early Music Fest, organised by O Corvo e a Raposa – Associação Cultural in strategic partnership with the Municipality of Vila do Bispo. For 2025, the opening concert will feature Noa Noa Ensemble (Filipe Faria, Tiago Matias and Baltazar Molina) on 16 August at 6pm in the main church (Igreja Matriz) of Nossa Senhora da Conceição, Vila do Bispo, focused on Iberian music between ancestry and contemporaneity, with the programme ‘Língua’. At 11:00 am, in the same space, there was an open class on historical plucked string instruments, with Tiago Matias. Noa Noa Ensemble performed on 17 August at 4 pm at the Church of Misericórdia de Aljezur, as part of an extension of the partnership with the Municipality of Aljezur and Santa Casa da Misericórdia de Aljezur, with the support of CCDR I.P. COSTA VICENTINA Early Music Fest ended on the weekend of 23rd and 24th August at the Fortaleza de Sagres - Museus e Monumentos de Portugal E.P.E, dedicated to the International Day for the Remembrance of the Slave Trade and its Abolition. It started with a concert by the Ensemble AntiQuorum (Ana Sousa, Nuno de Mendonça Raimundo et al) on 23rd August at 5 p.m., focusing on Iberian music from the era of maritime expansion, and ended on 24th August, Sunday, with a workshop/performance directed by Ana Celorico Machado at 2:00 pm and a lecture by Nuno de Mendonça Raimundo (CESEM) at 4:00 pm, thus closing the 3rd Edition.</p>
+        <a class="ed-dl" href="https://ocorvoearaposa.pt/cvemf2025.pdf" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+          <span data-l="pt">Programa 2025 (PDF · 6 MB)</span><span data-l="en">Programme 2025 (PDF · 6 MB)</span>
+        </a>
+      </div>
+    </details>
   </div>
 </section>
 
