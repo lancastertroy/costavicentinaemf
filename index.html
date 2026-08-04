@@ -113,6 +113,14 @@
     letter-spacing:0.02em;font-size:24px;text-transform:uppercase;color:#f2f1ef;line-height:1.15;
     min-height:2.3em;text-wrap:balance}
 
+  /* Botones de enlace. En móvil ocupan toda la fila para que el área de toque sea holgada. */
+  .cta{display:inline-flex;align-items:center;justify-content:center;flex:1 1 240px;
+    padding:16px 32px;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:15px;
+    letter-spacing:0.06em;text-transform:uppercase;line-height:1;text-decoration:none;
+    color:#fff;border:1px solid rgba(255,255,255,0.7);transition:background .25s,color .25s}
+  .cta:hover,.cta:focus-visible{background:#fff;color:#1c1d1f;border-color:#fff}
+  @media(min-width:560px){.cta{flex:0 0 auto}}
+
   .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
     clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
@@ -579,6 +587,15 @@
       <span data-l="pt">Valorizamos por isso a circulação nacional e internacional de artistas que trabalham entre-mundos, entre-géneros e entre-regiões, como forma de humilde contributo para a sociedade do esquecimento em que vivemos.</span>
       <span data-l="en">We therefore value the national and international circulation of artists who work between-worlds, between-genres and between-regions, as a form of humble contribute against the nowadays society of oblivion.</span>
     </p>
+
+    <div style="margin-top:40px; display:flex; flex-wrap:wrap; gap:16px">
+      <a class="cta" href="https://www.ocorvoearaposa.pt/cvemf" target="_blank" rel="noopener">
+        <span data-l="pt">Mais info</span><span data-l="en">More info</span>
+      </a>
+      <a class="cta" href="https://www.ocorvoearaposa.pt/cvemf" target="_blank" rel="noopener">
+        <span data-l="pt">Edições anteriores</span><span data-l="en">Previous editions</span>
+      </a>
+    </div>
   </div>
 </section>
 
