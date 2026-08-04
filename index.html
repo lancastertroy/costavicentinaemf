@@ -88,8 +88,9 @@
   /* ---- Carrusel de vídeo ----
      Scroll horizontal nativo (dedo en móvil, flechas en escritorio). Las tarjetas son
      miniaturas: el reproductor de Vimeo se carga sólo al pulsar play. */
-  .vcar{display:flex;gap:24px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
-    padding:40px clamp(24px,5vw,64px);scrollbar-width:none;-ms-overflow-style:none;
+  .vcar{display:flex;align-items:flex-start;gap:24px;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x proximity;padding:40px clamp(24px,5vw,64px);
+    scrollbar-width:none;-ms-overflow-style:none;
     -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
   .vcar::-webkit-scrollbar{display:none}
   .vcard{flex:0 0 78vw;max-width:380px;scroll-snap-align:center}
@@ -106,8 +107,11 @@
   .vthumb:hover .vplay{color:#e88b3d}
   .vkicker{margin-top:16px;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:13px;
     letter-spacing:0.06em;text-transform:uppercase;color:#a4551a;line-height:1.3}
+  /* Dos líneas reservadas en todas las tarjetas: así ninguna estira la fila y el respiro
+     de arriba y el de abajo quedan iguales, tenga el artista un nombre corto o largo. */
   .vtitle{margin-top:8px;font-family:'Saira Extra Condensed',sans-serif;font-weight:700;
-    letter-spacing:0.02em;font-size:24px;text-transform:uppercase;color:#f2f1ef;line-height:1.15}
+    letter-spacing:0.02em;font-size:24px;text-transform:uppercase;color:#f2f1ef;line-height:1.15;
+    min-height:2.3em;text-wrap:balance}
 
   .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
     clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -372,7 +376,7 @@
 </section>
 
 <!-- ============ ARQUIVO EM VÍDEO ============ -->
-<section style="background:#1c1d1f; padding:24px 0 40px">
+<section style="background:#1c1d1f; padding:24px 0">
   <div class="vwrap">
     <div class="vcar" id="vcar">
     <!-- VIDEOS:START -->
@@ -494,7 +498,7 @@
         <div class="vtitle">Heroínas (PT)</div>
       </article>
       <article class="vcard">
-        <a class="vthumb" href="https://vimeo.com/661769611" data-vid="661769611" data-titulo="Izmir Raposeira Baroque Ensemble (TK/PT)"
+        <a class="vthumb" href="https://vimeo.com/661769611" data-vid="661769611" data-titulo="Izmir Raposeira Baroque Ensemble (TR/PT)"
            target="_blank" rel="noopener">
           <img src="img/video-661769611-480.webp"
                srcset="img/video-661769611-480.webp 480w, img/video-661769611-800.webp 800w"
@@ -504,7 +508,7 @@
           <span class="sr">COSTA VICENTINA Early Music Fest '21 | #02 Izmir Raposeira Baroque Ensemble (tk/pt)</span>
         </a>
         <div class="vkicker">Ermida de Guadalupe · '21</div>
-        <div class="vtitle">Izmir Raposeira Baroque Ensemble (TK/PT)</div>
+        <div class="vtitle">Izmir Raposeira Baroque Ensemble (TR/PT)</div>
       </article>
       <article class="vcard">
         <a class="vthumb" href="https://vimeo.com/1052452699" data-vid="1052452699" data-titulo="Terrae Iberae (PT/ES)"
