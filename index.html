@@ -185,6 +185,15 @@
     justify-content:center;cursor:pointer;background:rgba(20,21,23,0.72);color:#f2f1ef;
     border:1px solid rgba(255,255,255,0.3);line-height:1}
   .vclose:hover{background:#f2f1ef;color:#1c1d1f;border-color:#f2f1ef}
+
+  /* ---- Cartaz do concerto ---- */
+  .infobtn{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 20px;
+    font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;
+    text-transform:uppercase;text-decoration:none;color:#1c1d1f;border:1px solid #1c1d1f;
+    transition:background .25s,color .25s}
+  .infobtn:hover,.infobtn:focus-visible{background:#1c1d1f;color:#f2f1ef}
+  /* O cartaz é vertical: quem manda é a altura do ecrã, para nunca sair fora. */
+  .cartaz{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100vh - 32px)}
 </style>
 </head>
 
@@ -283,6 +292,13 @@
                   <li>Vicente Morgado | arquialaúde e guitarra barroca</li>
                   <li>Guilherme Lopes | ator (diseur)</li>
                 </ul>
+                <a class="infobtn" href="img/cartaz-lagos-1400.webp" target="_blank" rel="noopener"
+                   data-cartaz="img/cartaz-lagos-800.webp"
+                   data-cartaz-set="img/cartaz-lagos-800.webp 800w, img/cartaz-lagos-1400.webp 1400w"
+                   data-cartaz-alt="Cartaz do concerto do Ensemble Àpala, 22 de agosto, Igreja de Santo António, Lagos">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  <span data-l="pt">Mais info</span><span data-l="en">More info</span>
+                </a>
               </div>
             </div>
           </div>
@@ -616,6 +632,20 @@
   </div>
   <button type="button" class="vclose" id="vclose">
     <span data-l="pt" class="sr">Fechar vídeo</span><span data-l="en" class="sr">Close video</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+</dialog>
+
+<!-- Cartaz do concerto em grande. Mesmo <dialog> do vídeo: o navegador trata do foco, do
+     fundo e da tecla Esc. A imagem só é carregada ao abrir — quem nunca carrega no botão
+     nunca a descarrega. -->
+<dialog id="cmodal" class="vmodal">
+  <div class="vmodal-in">
+    <img id="cimg" class="cartaz" alt="" width="2000" height="2828" decoding="async"
+         sizes="(max-height:900px) 640px, (max-height:1300px) 900px, 1400px">
+  </div>
+  <button type="button" class="vclose" id="cclose">
+    <span data-l="pt" class="sr">Fechar cartaz</span><span data-l="en" class="sr">Close poster</span>
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
   </button>
 </dialog>
@@ -1234,6 +1264,44 @@
     var next = document.getElementById('vnext');
     if (prev) prev.addEventListener('click', function () { car.scrollBy({ left: -paso(), behavior: 'smooth' }); });
     if (next) next.addEventListener('click', function () { car.scrollBy({ left: paso(), behavior: 'smooth' }); });
+  })();
+
+  /* ---- Cartaz do concerto ----
+     Delegado no documento: qualquer ligação com data-cartaz abre o pop-up, por isso juntar
+     o cartaz de outro dia é só uma linha de HTML. Sem <dialog> (navegador antigo) a ligação
+     faz o que sempre fez e abre a imagem noutro separador. */
+  (function () {
+    var modal = document.getElementById('cmodal');
+    var img = document.getElementById('cimg');
+    if (!modal || !img || typeof modal.showModal !== 'function') return;
+    var origem = null;
+
+    document.addEventListener('click', function (e) {
+      if (!e.target || !e.target.closest) return;
+      var alvo = e.target.closest('[data-cartaz]');
+      if (!alvo) return;
+      e.preventDefault();
+      origem = alvo;
+      // Primeiro o srcset, depois o src: assim o navegador escolhe o tamanho de uma só vez.
+      if (alvo.dataset.cartazSet) img.srcset = alvo.dataset.cartazSet;
+      img.src = alvo.dataset.cartaz;
+      img.alt = alvo.dataset.cartazAlt || '';
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Fechar tocando fora do cartaz. Esc já é o próprio <dialog> que trata.
+    modal.addEventListener('click', function (e) {
+      if (!e.target.closest('.cartaz')) modal.close();
+    });
+    document.getElementById('cclose').addEventListener('click', function () { modal.close(); });
+    modal.addEventListener('close', function () {
+      img.removeAttribute('srcset');
+      img.removeAttribute('src');
+      img.alt = '';
+      document.body.style.overflow = '';
+      if (origem) { origem.focus(); origem = null; }
+    });
   })();
 
   // Português é sempre o idioma por omissão. Só o inglês escolhido à mão se recorda,
