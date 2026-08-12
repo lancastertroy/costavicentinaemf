@@ -130,7 +130,9 @@
     letter-spacing:0.02em;text-transform:uppercase;font-size:clamp(22px,3.2vw,30px);
     line-height:1.15;color:#1c1d1f;transition:color .2s}
   .ed-s::-webkit-details-marker{display:none}
-  .ed-s:hover,.ed-s:focus-visible{color:#a4551a}
+  /* Aberta fica em destaque, para se saber sempre qual das edições se está a ler.
+     O ícone usa currentColor, por isso acompanha sozinho. */
+  .ed-s:hover,.ed-s:focus-visible,.ed[open] .ed-s{color:#a4551a}
   .ed-i{position:relative;flex:none;width:22px;height:22px}
   .ed-i::before,.ed-i::after{content:"";position:absolute;left:50%;top:50%;background:currentColor}
   .ed-i::before{width:22px;height:2px;transform:translate(-50%,-50%)}
