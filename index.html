@@ -136,10 +136,10 @@
   .ed-i::before{width:22px;height:2px;transform:translate(-50%,-50%)}
   .ed-i::after{width:2px;height:22px;transform:translate(-50%,-50%);transition:transform .25s ease}
   .ed[open] .ed-i::after{transform:translate(-50%,-50%) scaleY(0)}
-  /* La medida de lectura la marca el párrafo, no el bloque: así el carrusel de vídeos
-     puede usar todo el ancho de la columna sin estirar el texto. */
+  /* Sin tope propio: el texto, el resumen y el carrusel de vídeos usan el mismo ancho de
+     columna, así los tres terminan en el mismo borde derecho. */
   .ed-b{padding:0 0 32px}
-  .ed-b p{margin:0 0 24px;max-width:760px;font-weight:400;font-size:17px;line-height:1.55;
+  .ed-b p{margin:0 0 24px;font-weight:400;font-size:17px;line-height:1.55;
     color:#33353a;text-wrap:pretty}
   .ed-dl{display:inline-flex;align-items:center;gap:12px;padding:14px 28px;
     font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.06em;
@@ -172,6 +172,21 @@
   /* ---- O mesmo carrusel dentro de cada edição anterior ----
      As tarjetas são as da videoteca: aqui só muda o que o fundo claro pede (o título em
      escuro, as setas em negativo) e o recuo, que aqui já não é de largura total. */
+  /* ---- Resumo de uma edição já passada ----
+     A mesma linguagem do programa de 2026, mas em corpo pequeno: isto é um resumo dos dias,
+     dos artistas e dos lugares — o detalhe completo está no PDF, logo abaixo. */
+  .rs{margin:8px 0 32px}
+  .rs-d{margin-top:20px;padding-top:14px;border-top:1px solid #dddcd8}
+  .rs-f{font-family:'Saira Extra Condensed',sans-serif;font-weight:700;letter-spacing:0.02em;
+    font-size:22px;text-transform:uppercase;color:#1c1d1f;line-height:1.2}
+  .rs-l{font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;
+    text-transform:uppercase;color:#55575c;line-height:1.35;margin-top:4px}
+  .rs-e{display:flex;gap:16px;align-items:baseline;margin-top:10px}
+  .rs-h{flex:none;width:46px;font-family:'Saira Extra Condensed',sans-serif;font-weight:700;
+    letter-spacing:0.02em;font-size:18px;color:#a4551a;line-height:1.5}
+  .rs-t{min-width:0;font-weight:400;font-size:15px;line-height:1.55;color:#33353a}
+  .rs-t b{font-weight:600;color:#1c1d1f}
+
   .edwrap{position:relative;margin-top:8px}
   .edcar{padding:24px 0 8px}
   .edcar .vtitle{color:#1c1d1f}
@@ -855,6 +870,54 @@
       <div class="ed-b">
         <p data-l="pt">A 3.ª edição teve lugar de 16 a 24 de agosto de 2025. O concerto de abertura aconteceu com Noa Noa Ensemble (Filipe Faria, Tiago Matias e Baltazar Molina) a 16 de agosto pelas 18:00 na Igreja (Matriz) de Nossa Senhora da Conceição, Vila do Bispo, tendo como foco a música ibérica entre a ancestralidade e contemporaneidade, com o programa “Língua”. Às 11h00, no mesmo espaço, dando lugar à aula aberta sobre instrumentos antigos de corda dedilhada, com Tiago Matias. Noa Noa Ensemble apresentou-se também a 17 de agosto pelas 16:00, na Igreja de Misericórdia de Aljezur, numa extensão da parceria com o Município de Aljezur e Santa Casa da Misericórdia de Aljezur e o apoio da CCDR I.P. COSTA VICENTINA Early Music Fest encerrou a 23/24 de agosto na Fortaleza de Sagres - Museus e Monumentos de Portugal E.P.E, num fim-de-semana dedicado ao Dia Internacional em Memória do Tráfico de Escravos e da sua Abolição. Iniciou com concerto do Ensemble AntiQuorum (Ana Sousa, Nuno de Mendonça Raimundo et al) dia 23 de agosto, 17:00, apostando na música ibérica da época da expansão marítima e terminou dia 24 de agosto, domingo, com uma oficina/performance dirigida por Ana Celorico Machado pelas 14:00 e uma palestra de Nuno de Mendonça Raimundo (CESEM) pelas 16:00, encerrando assim a 3.ª Edição.</p>
         <p data-l="en">From 16 to 24 August 2025, the Costa Vicentina hosted the 3rd edition of the Costa Vicentina Early Music Fest, organised by O Corvo e a Raposa – Associação Cultural in strategic partnership with the Municipality of Vila do Bispo. For 2025, the opening concert will feature Noa Noa Ensemble (Filipe Faria, Tiago Matias and Baltazar Molina) on 16 August at 6pm in the main church (Igreja Matriz) of Nossa Senhora da Conceição, Vila do Bispo, focused on Iberian music between ancestry and contemporaneity, with the programme ‘Língua’. At 11:00 am, in the same space, there was an open class on historical plucked string instruments, with Tiago Matias. Noa Noa Ensemble performed on 17 August at 4 pm at the Church of Misericórdia de Aljezur, as part of an extension of the partnership with the Municipality of Aljezur and Santa Casa da Misericórdia de Aljezur, with the support of CCDR I.P. COSTA VICENTINA Early Music Fest ended on the weekend of 23rd and 24th August at the Fortaleza de Sagres - Museus e Monumentos de Portugal E.P.E, dedicated to the International Day for the Remembrance of the Slave Trade and its Abolition. It started with a concert by the Ensemble AntiQuorum (Ana Sousa, Nuno de Mendonça Raimundo et al) on 23rd August at 5 p.m., focusing on Iberian music from the era of maritime expansion, and ended on 24th August, Sunday, with a workshop/performance directed by Ana Celorico Machado at 2:00 pm and a lecture by Nuno de Mendonça Raimundo (CESEM) at 4:00 pm, thus closing the 3rd Edition.</p>
+        <div class="rs">
+          <div class="kicker"><span data-l="pt">16—24 agosto 2025 · Vila do Bispo, Aljezur e Sagres</span><span data-l="en">16—24 August 2025 · Vila do Bispo, Aljezur and Sagres</span></div>
+
+          <div class="rs-d">
+            <div class="rs-f">16 <span data-l="pt">ago · sábado</span><span data-l="en">Aug · Saturday</span></div>
+            <div class="rs-l">Igreja (Matriz) de Nossa Senhora da Conceição, Vila do Bispo</div>
+            <div class="rs-e">
+              <div class="rs-h">11:00</div>
+              <div class="rs-t"><b>Tiago Matias</b> — <span data-l="pt">aula aberta sobre cordofones dedilhados históricos</span><span data-l="en">open class on historical plucked string instruments</span></div>
+            </div>
+            <div class="rs-e">
+              <div class="rs-h">18:00</div>
+              <div class="rs-t"><b>Noa Noa Ensemble</b> — <span data-l="pt">concerto de abertura “Língua”</span><span data-l="en">opening concert “Língua”</span></div>
+            </div>
+          </div>
+
+          <div class="rs-d">
+            <div class="rs-f">17 <span data-l="pt">ago · domingo</span><span data-l="en">Aug · Sunday</span></div>
+            <div class="rs-l">Igreja da Misericórdia de Aljezur</div>
+            <div class="rs-e">
+              <div class="rs-h">16:00</div>
+              <div class="rs-t"><b>Noa Noa Ensemble</b> — <span data-l="pt">concerto “Língua”</span><span data-l="en">concert “Língua”</span></div>
+            </div>
+          </div>
+
+          <div class="rs-d">
+            <div class="rs-f">23 <span data-l="pt">ago · sábado</span><span data-l="en">Aug · Saturday</span></div>
+            <div class="rs-l">Fortaleza de Sagres</div>
+            <div class="rs-e">
+              <div class="rs-h">17:00</div>
+              <div class="rs-t"><b>Ensemble AntiQuorum</b> — <span data-l="pt">concerto comentado “Forro Ficamo — Sons Cativos”, obras dos séculos XVI e XVII, com direção de Ana Sousa e Nuno de Mendonça Raimundo</span><span data-l="en">concert with commentary “Forro Ficamo — Sons Cativos”, works from the 16th and 17th centuries, directed by Ana Sousa and Nuno de Mendonça Raimundo</span></div>
+            </div>
+          </div>
+
+          <div class="rs-d">
+            <div class="rs-f">24 <span data-l="pt">ago · domingo</span><span data-l="en">Aug · Sunday</span></div>
+            <div class="rs-l">Fortaleza de Sagres</div>
+            <div class="rs-e">
+              <div class="rs-h">14:00</div>
+              <div class="rs-t"><b>Ana Celorico Machado</b> — <span data-l="pt">oficina/performance “Ponto Corrente”</span><span data-l="en">workshop/performance “Ponto Corrente”</span></div>
+            </div>
+            <div class="rs-e">
+              <div class="rs-h">16:00</div>
+              <div class="rs-t"><b>Nuno de Mendonça Raimundo</b> (CESEM) — <span data-l="pt">palestra “A presença e influência da música africana em Portugal no Renascimento”</span><span data-l="en">talk “A presença e influência da música africana em Portugal no Renascimento”</span></div>
+            </div>
+          </div>
+        </div>
+
         <a class="ed-dl" href="https://ocorvoearaposa.pt/cvemf2025.pdf" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
           <span data-l="pt">Programa 2025 (PDF · 6 MB)</span><span data-l="en">Programme 2025 (PDF · 6 MB)</span>
