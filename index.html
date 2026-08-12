@@ -167,6 +167,19 @@
   .vnext{right:clamp(8px,2vw,24px)}
   @media(hover:none){.vbtn{display:none}}
 
+  /* ---- O mesmo carrusel dentro de cada edição anterior ----
+     As tarjetas são as da videoteca: aqui só muda o que o fundo claro pede (o título em
+     escuro, as setas em negativo) e o recuo, que aqui já não é de largura total. */
+  .edwrap{position:relative;margin-top:8px}
+  .edcar{padding:24px 0 8px}
+  .edcar .vtitle{color:#1c1d1f}
+  /* As setas ao centro da miniatura: 24 px de recuo + metade de 340×9/16. */
+  .edwrap .vbtn{top:119px;background:#1c1d1f;border-color:#1c1d1f}
+  .edwrap .vbtn:hover{background:#a4551a;color:#f2f1ef;border-color:#a4551a}
+  .edwrap .vbtn[disabled]{opacity:.25;pointer-events:none}
+  /* Se cabem todos, as setas não fazem falta. */
+  .edwrap.sem-setas .vbtn{display:none}
+
   /* ---- Reproductor a pantalla grande ---- */
   .vmodal{width:100%;max-width:100%;height:100%;max-height:100%;margin:0;padding:0;border:0;
     background:transparent;color:#f2f1ef;overflow:hidden}
@@ -840,6 +853,57 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
           <span data-l="pt">Programa 2025 (PDF · 6 MB)</span><span data-l="en">Programme 2025 (PDF · 6 MB)</span>
         </a>
+        <div class="edwrap">
+          <div class="vcar edcar">
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1113655629" data-vid="1113655629" data-titulo="Noa Noa Ensemble (PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1113655629-480.webp"
+             srcset="img/video-1113655629-480.webp 480w, img/video-1113655629-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '25 | III Ed. #01 Vila do Bispo</span>
+      </a>
+      <div class="vkicker">Vila do Bispo · '25</div>
+      <div class="vtitle">Noa Noa Ensemble (PT)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1113942618" data-vid="1113942618" data-titulo="Noa Noa Ensemble (PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1113942618-480.webp"
+             srcset="img/video-1113942618-480.webp 480w, img/video-1113942618-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '25 | III Ed. #02 Aljezur</span>
+      </a>
+      <div class="vkicker">Aljezur · '25</div>
+      <div class="vtitle">Noa Noa Ensemble (PT)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1114564909" data-vid="1114564909" data-titulo="AntiQuorum (PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1114564909-480.webp"
+             srcset="img/video-1114564909-480.webp 480w, img/video-1114564909-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '25 | III Ed. #03 Fortaleza de Sagres</span>
+      </a>
+      <div class="vkicker">Fortaleza de Sagres · '25</div>
+      <div class="vtitle">AntiQuorum (PT)</div>
+    </article>
+          </div>
+          <button type="button" class="vbtn vprev">
+            <span data-l="pt" class="sr">Vídeo anterior</span><span data-l="en" class="sr">Previous video</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <button type="button" class="vbtn vnext">
+            <span data-l="pt" class="sr">Vídeo seguinte</span><span data-l="en" class="sr">Next video</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
     </details>
 
@@ -857,6 +921,57 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
           Festival Finder
         </a>
+        <div class="edwrap">
+          <div class="vcar edcar">
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1099379040" data-vid="1099379040" data-titulo="II Edição 2024"
+         target="_blank" rel="noopener">
+        <img src="img/video-1099379040-480.webp"
+             srcset="img/video-1099379040-480.webp 480w, img/video-1099379040-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '24 | II Ed.</span>
+      </a>
+      <div class="vkicker">Vila do Bispo · '24</div>
+      <div class="vtitle">II Edição 2024</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1080405555" data-vid="1080405555" data-titulo="EuropAntiqua (IT/DE/PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1080405555-480.webp"
+             srcset="img/video-1080405555-480.webp 480w, img/video-1080405555-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '24 | #01 EuropAntiqua [it/de/pt]</span>
+      </a>
+      <div class="vkicker">Vila do Bispo · '24</div>
+      <div class="vtitle">EuropAntiqua (IT/DE/PT)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1093781826" data-vid="1093781826" data-titulo="Ferrabosco Ensemble (ES)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1093781826-480.webp"
+             srcset="img/video-1093781826-480.webp 480w, img/video-1093781826-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '24 | #02 FERRABOSCO ENSEMBLE (Consort de viola da gamba)</span>
+      </a>
+      <div class="vkicker">Vila do Bispo · '24</div>
+      <div class="vtitle">Ferrabosco Ensemble (ES)</div>
+    </article>
+          </div>
+          <button type="button" class="vbtn vprev">
+            <span data-l="pt" class="sr">Vídeo anterior</span><span data-l="en" class="sr">Previous video</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <button type="button" class="vbtn vnext">
+            <span data-l="pt" class="sr">Vídeo seguinte</span><span data-l="en" class="sr">Next video</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
     </details>
 
@@ -879,6 +994,83 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
             Festival Finder
           </a>
+        </div>
+        <div class="edwrap">
+          <div class="vcar edcar">
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1049502837" data-vid="1049502837" data-titulo="Ensemble Ars Lusitana (PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1049502837-480.webp"
+             srcset="img/video-1049502837-480.webp 480w, img/video-1049502837-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '21 | #01 Ensemble Ars Lusitana (pt)</span>
+      </a>
+      <div class="vkicker">Ermida de Guadalupe · '21</div>
+      <div class="vtitle">Ensemble Ars Lusitana (PT)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/661769611" data-vid="661769611" data-titulo="Izmir Raposeira Baroque Ensemble (TR/PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-661769611-480.webp"
+             srcset="img/video-661769611-480.webp 480w, img/video-661769611-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '21 | #02 Izmir Raposeira Baroque Ensemble (tk/pt)</span>
+      </a>
+      <div class="vkicker">Ermida de Guadalupe · '21</div>
+      <div class="vtitle">Izmir Raposeira Baroque Ensemble (TR/PT)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1052452699" data-vid="1052452699" data-titulo="Terrae Iberae (PT/ES)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1052452699-480.webp"
+             srcset="img/video-1052452699-480.webp 480w, img/video-1052452699-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '21 | #03 Terrae Iberae (pt/es)</span>
+      </a>
+      <div class="vkicker">Costa Vicentina EMF · '21</div>
+      <div class="vtitle">Terrae Iberae (PT/ES)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1057132760" data-vid="1057132760" data-titulo="Ensamble Ditirambo (MX/PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1057132760-480.webp"
+             srcset="img/video-1057132760-480.webp 480w, img/video-1057132760-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '21 | #04 Ensamble Ditirambo (mx/pt)</span>
+      </a>
+      <div class="vkicker">Costa Vicentina EMF · '21</div>
+      <div class="vtitle">Ensamble Ditirambo (MX/PT)</div>
+    </article>
+    <article class="vcard">
+      <a class="vthumb" href="https://vimeo.com/1079118007" data-vid="1079118007" data-titulo="Heroínas (PT)"
+         target="_blank" rel="noopener">
+        <img src="img/video-1079118007-480.webp"
+             srcset="img/video-1079118007-480.webp 480w, img/video-1079118007-800.webp 800w"
+             sizes="(min-width:820px) 340px, 78vw" width="800" height="450"
+             loading="lazy" decoding="async" alt="">
+        <span class="vplay"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr">COSTA VICENTINA Early Music Fest '21 | #05 Heroínas (pt)</span>
+      </a>
+      <div class="vkicker">Costa Vicentina EMF · '21</div>
+      <div class="vtitle">Heroínas (PT)</div>
+    </article>
+          </div>
+          <button type="button" class="vbtn vprev">
+            <span data-l="pt" class="sr">Vídeo anterior</span><span data-l="en" class="sr">Previous video</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <button type="button" class="vbtn vnext">
+            <span data-l="pt" class="sr">Vídeo seguinte</span><span data-l="en" class="sr">Next video</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
     </details>
@@ -1237,7 +1429,10 @@
 
     function cerrar() { if (modal.open) modal.close(); }
 
-    car.addEventListener('click', function (e) {
+    // Delegado en todo el documento: el mismo reproductor sirve a la videoteca y a los
+    // carruseles de las ediciones anteriores, sin duplicar la lógica.
+    document.addEventListener('click', function (e) {
+      if (!e.target || !e.target.closest) return;
       var enlace = e.target.closest('.vthumb');
       if (!enlace || !enlace.dataset.vid) return;
       // Sin <dialog> (navegador antiguo) el enlace hace lo suyo y abre Vimeo.
@@ -1299,6 +1494,44 @@
     var next = document.getElementById('vnext');
     if (prev) prev.addEventListener('click', function () { car.scrollBy({ left: -paso(), behavior: 'smooth' }); });
     if (next) next.addEventListener('click', function () { car.scrollBy({ left: paso(), behavior: 'smooth' }); });
+  })();
+
+  /* ---- Carruseles de las ediciones anteriores ----
+     Versión corta del de la videoteca: aquí son 3 a 5 vídeos, así que no hay bucle infinito
+     ni clones — sólo el scroll nativo y las flechas. Las flechas se esconden cuando caben
+     todos y se apagan al llegar a cada extremo. Como viven dentro de un <details> cerrado,
+     hay que volver a medir al abrir la edición: cerrada, mide cero. */
+  (function () {
+    var cars = document.querySelectorAll('.edcar');
+    if (!cars.length) return;
+
+    Array.prototype.forEach.call(cars, function (car) {
+      var caja = car.parentElement;
+      var prev = caja.querySelector('.vprev');
+      var next = caja.querySelector('.vnext');
+
+      function paso() {
+        var t = car.querySelector('.vcard');
+        return t ? t.getBoundingClientRect().width + 24 : car.clientWidth * 0.8;
+      }
+
+      function estado() {
+        var sobra = car.scrollWidth - car.clientWidth;
+        caja.classList.toggle('sem-setas', sobra <= 4);
+        if (prev) prev.disabled = car.scrollLeft <= 4;
+        if (next) next.disabled = car.scrollLeft >= sobra - 4;
+      }
+
+      if (prev) prev.addEventListener('click', function () { car.scrollBy({ left: -paso(), behavior: 'smooth' }); });
+      if (next) next.addEventListener('click', function () { car.scrollBy({ left: paso(), behavior: 'smooth' }); });
+      car.addEventListener('scroll', estado, { passive: true });
+      window.addEventListener('resize', estado);
+      if (window.ResizeObserver) new ResizeObserver(estado).observe(car);
+
+      var det = car.closest('details');
+      if (det) det.addEventListener('toggle', estado);
+      estado();
+    });
   })();
 
   /* ---- Cartaz do concerto ----
