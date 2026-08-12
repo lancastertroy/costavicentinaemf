@@ -136,9 +136,11 @@
   .ed-i::before{width:22px;height:2px;transform:translate(-50%,-50%)}
   .ed-i::after{width:2px;height:22px;transform:translate(-50%,-50%);transition:transform .25s ease}
   .ed[open] .ed-i::after{transform:translate(-50%,-50%) scaleY(0)}
-  .ed-b{padding:0 0 32px;max-width:760px}
-  .ed-b p{margin:0 0 24px;font-weight:400;font-size:17px;line-height:1.55;color:#33353a;
-    text-wrap:pretty}
+  /* La medida de lectura la marca el párrafo, no el bloque: así el carrusel de vídeos
+     puede usar todo el ancho de la columna sin estirar el texto. */
+  .ed-b{padding:0 0 32px}
+  .ed-b p{margin:0 0 24px;max-width:760px;font-weight:400;font-size:17px;line-height:1.55;
+    color:#33353a;text-wrap:pretty}
   .ed-dl{display:inline-flex;align-items:center;gap:12px;padding:14px 28px;
     font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.06em;
     text-transform:uppercase;text-decoration:none;color:#1c1d1f;border:1px solid #1c1d1f;
@@ -173,12 +175,16 @@
   .edwrap{position:relative;margin-top:8px}
   .edcar{padding:24px 0 8px}
   .edcar .vtitle{color:#1c1d1f}
-  /* As setas ao centro da miniatura: 24 px de recuo + metade de 340×9/16. */
-  .edwrap .vbtn{top:119px;background:#1c1d1f;border-color:#1c1d1f}
+  /* Aqui a tarjeta é elástica, não fixa: cabem sempre 3, 2 ou 1 inteiras, nunca meia.
+     O 48 e o 24 são os espaços entre elas (gap de 24 px). */
+  .edcar .vcard{flex:0 0 calc((100% - 48px) / 3);max-width:none}
+  @media(max-width:1000px){.edcar .vcard{flex:0 0 calc((100% - 24px) / 2)}}
+  @media(max-width:640px){.edcar .vcard{flex:0 0 100%}}
+  /* As setas ao centro da miniatura. A altura da miniatura muda com o ancho do ecrã, e em
+     CSS um % de "top" mede-se contra a altura, não contra o ancho — daí a variável, que o
+     JavaScript acerta com a altura real. O valor de reserva serve enquanto não a calcula. */
+  .edwrap .vbtn{top:calc(24px + var(--alto-mini, 180px) / 2);background:#1c1d1f;border-color:#1c1d1f}
   .edwrap .vbtn:hover{background:#a4551a;color:#f2f1ef;border-color:#a4551a}
-  .edwrap .vbtn[disabled]{opacity:.25;pointer-events:none}
-  /* Se cabem todos, as setas não fazem falta. */
-  .edwrap.sem-setas .vbtn{display:none}
 
   /* ---- Reproductor a pantalla grande ---- */
   .vmodal{width:100%;max-width:100%;height:100%;max-height:100%;margin:0;padding:0;border:0;
@@ -1390,16 +1396,19 @@
     document.getElementById('btn-en').setAttribute('aria-pressed', String(l === 'en'));
     try { localStorage.setItem('cvemf-lang', l); } catch (e) {}
   }
-  /* ---- Carrusel de vídeo ----
+  /* ---- Carruseles de vídeo ----
      Bucle infinito: el HTML trae un solo bloque de tarjetas y aquí se clona a los lados,
      dejando al visitante en el del medio. Al acercarse a un extremo se salta un bloque
      entero, sin animación: como los tres son iguales, el salto no se percibe y se puede
      arrastrar sin fin en ambos sentidos. Las copias van con aria-hidden para no repetirse
      a los lectores de pantalla, y clonar en el navegador evita triplicar el peso del HTML.
      Sin JavaScript el carrusel sigue arrastrándose (scroll nativo) y cada miniatura es un
-     enlace normal al vídeo en Vimeo. */
-  (function () {
-    var car = document.getElementById('vcar');
+     enlace normal al vídeo en Vimeo.
+
+     La misma función mueve la videoteca y los tres carruseles de las ediciones anteriores.
+     Éstos viven dentro de un <details> que empieza cerrado: cerrado mide cero, así que hay
+     que volver a medir cuando la edición se abre. */
+  function montarCarrusel(car, prev, next) {
     if (!car) return;
 
     var reales = Array.prototype.slice.call(car.children);
@@ -1419,60 +1428,25 @@
       car.appendChild(despues);
     }
 
-    // El reproductor sólo se carga al pulsar play, y lo hace dentro del modal: 11 iframes
-    // de Vimeo de entrada pesarían más que el resto del sitio junto.
-    var modal = document.getElementById('vmodal');
-    var marco = document.getElementById('vframe');
-    var rotulo = document.getElementById('vmodal-t');
-    var soporta = modal && typeof modal.showModal === 'function';
-    var origen = null;
-
-    function cerrar() { if (modal.open) modal.close(); }
-
-    // Delegado en todo el documento: el mismo reproductor sirve a la videoteca y a los
-    // carruseles de las ediciones anteriores, sin duplicar la lógica.
-    document.addEventListener('click', function (e) {
-      if (!e.target || !e.target.closest) return;
-      var enlace = e.target.closest('.vthumb');
-      if (!enlace || !enlace.dataset.vid) return;
-      // Sin <dialog> (navegador antiguo) el enlace hace lo suyo y abre Vimeo.
-      if (!soporta) return;
-      e.preventDefault();
-      origen = enlace;
-      var f = document.createElement('iframe');
-      f.src = 'https://player.vimeo.com/video/' + enlace.dataset.vid +
-              '?autoplay=1&title=0&byline=0&portrait=0&dnt=1';
-      f.allow = 'autoplay; fullscreen; picture-in-picture';
-      f.allowFullscreen = true;
-      f.title = enlace.getAttribute('data-titulo') || 'Vimeo';
-      marco.replaceChildren(f);
-      rotulo.textContent = enlace.getAttribute('data-titulo') || '';
-      modal.showModal();
-      document.body.style.overflow = 'hidden';
-    });
-
-    if (soporta) {
-      // Cerrar tocando fuera del vídeo. Esc ya lo resuelve el propio <dialog>.
-      modal.addEventListener('click', function (e) {
-        if (!e.target.closest('.vframe')) cerrar();
-      });
-      document.getElementById('vclose').addEventListener('click', cerrar);
-      modal.addEventListener('close', function () {
-        marco.replaceChildren();      // destruye el iframe: el vídeo deja de sonar
-        rotulo.textContent = '';
-        document.body.style.overflow = '';
-        if (origen) { origen.focus(); origen = null; }
-      });
-    }
-
+    var caja = car.parentElement;
+    var n = reales.length;
     var bloque = 0;
     function medir() {
-      bloque = car.scrollWidth / 3;
+      if (!car.clientWidth || !n) return;      // dentro de un <details> cerrado mide cero
+      // Un bloque medido de tarjeta a tarjeta, no dividiendo el ancho total: así el salto
+      // es exacto y la posición no se va corriendo vuelta a vuelta.
+      var a = car.children[n], b = car.children[n * 2];
+      bloque = (a && b) ? b.offsetLeft - a.offsetLeft : car.scrollWidth / 3;
       if (bloque > 0 && car.scrollLeft < 1) car.scrollLeft = bloque;
+      // Las flechas van al centro de la miniatura, que cambia de alto con el ancho.
+      var mini = car.querySelector('.vthumb');
+      if (mini && caja) caja.style.setProperty('--alto-mini', mini.offsetHeight + 'px');
     }
     // Las miniaturas son lazy: hay que remedir cuando el ancho real se asienta.
     if (window.ResizeObserver) new ResizeObserver(medir).observe(car);
     window.addEventListener('resize', medir);
+    var det = car.closest('details');
+    if (det) det.addEventListener('toggle', medir);
     medir();
 
     var pendiente = false;
@@ -1490,47 +1464,60 @@
       var t = car.querySelector('.vcard');
       return t ? t.getBoundingClientRect().width + 24 : car.clientWidth * 0.8;
     }
-    var prev = document.getElementById('vprev');
-    var next = document.getElementById('vnext');
     if (prev) prev.addEventListener('click', function () { car.scrollBy({ left: -paso(), behavior: 'smooth' }); });
     if (next) next.addEventListener('click', function () { car.scrollBy({ left: paso(), behavior: 'smooth' }); });
-  })();
+  }
 
-  /* ---- Carruseles de las ediciones anteriores ----
-     Versión corta del de la videoteca: aquí son 3 a 5 vídeos, así que no hay bucle infinito
-     ni clones — sólo el scroll nativo y las flechas. Las flechas se esconden cuando caben
-     todos y se apagan al llegar a cada extremo. Como viven dentro de un <details> cerrado,
-     hay que volver a medir al abrir la edición: cerrada, mide cero. */
+  montarCarrusel(document.getElementById('vcar'),
+                 document.getElementById('vprev'),
+                 document.getElementById('vnext'));
+  Array.prototype.forEach.call(document.querySelectorAll('.edcar'), function (car) {
+    var caja = car.parentElement;
+    montarCarrusel(car, caja.querySelector('.vprev'), caja.querySelector('.vnext'));
+  });
+
+  /* ---- Reproductor a pantalla grande ----
+     Sólo se carga al pulsar play: 22 iframes de Vimeo de entrada pesarían más que el resto
+     del sitio junto. Va delegado en todo el documento, así el mismo reproductor sirve a los
+     cuatro carruseles sin duplicar la lógica. */
   (function () {
-    var cars = document.querySelectorAll('.edcar');
-    if (!cars.length) return;
+    var modal = document.getElementById('vmodal');
+    var marco = document.getElementById('vframe');
+    var rotulo = document.getElementById('vmodal-t');
+    // Sin <dialog> (navegador antiguo) no se monta nada y el enlace hace lo suyo: abrir Vimeo.
+    if (!modal || typeof modal.showModal !== 'function') return;
+    var origen = null;
 
-    Array.prototype.forEach.call(cars, function (car) {
-      var caja = car.parentElement;
-      var prev = caja.querySelector('.vprev');
-      var next = caja.querySelector('.vnext');
+    function cerrar() { if (modal.open) modal.close(); }
 
-      function paso() {
-        var t = car.querySelector('.vcard');
-        return t ? t.getBoundingClientRect().width + 24 : car.clientWidth * 0.8;
-      }
+    document.addEventListener('click', function (e) {
+      if (!e.target || !e.target.closest) return;
+      var enlace = e.target.closest('.vthumb');
+      if (!enlace || !enlace.dataset.vid) return;
+      e.preventDefault();
+      origen = enlace;
+      var f = document.createElement('iframe');
+      f.src = 'https://player.vimeo.com/video/' + enlace.dataset.vid +
+              '?autoplay=1&title=0&byline=0&portrait=0&dnt=1';
+      f.allow = 'autoplay; fullscreen; picture-in-picture';
+      f.allowFullscreen = true;
+      f.title = enlace.getAttribute('data-titulo') || 'Vimeo';
+      marco.replaceChildren(f);
+      rotulo.textContent = enlace.getAttribute('data-titulo') || '';
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+    });
 
-      function estado() {
-        var sobra = car.scrollWidth - car.clientWidth;
-        caja.classList.toggle('sem-setas', sobra <= 4);
-        if (prev) prev.disabled = car.scrollLeft <= 4;
-        if (next) next.disabled = car.scrollLeft >= sobra - 4;
-      }
-
-      if (prev) prev.addEventListener('click', function () { car.scrollBy({ left: -paso(), behavior: 'smooth' }); });
-      if (next) next.addEventListener('click', function () { car.scrollBy({ left: paso(), behavior: 'smooth' }); });
-      car.addEventListener('scroll', estado, { passive: true });
-      window.addEventListener('resize', estado);
-      if (window.ResizeObserver) new ResizeObserver(estado).observe(car);
-
-      var det = car.closest('details');
-      if (det) det.addEventListener('toggle', estado);
-      estado();
+    // Cerrar tocando fuera del vídeo. Esc ya lo resuelve el propio <dialog>.
+    modal.addEventListener('click', function (e) {
+      if (!e.target.closest('.vframe')) cerrar();
+    });
+    document.getElementById('vclose').addEventListener('click', cerrar);
+    modal.addEventListener('close', function () {
+      marco.replaceChildren();      // destruye el iframe: el vídeo deja de sonar
+      rotulo.textContent = '';
+      document.body.style.overflow = '';
+      if (origen) { origen.focus(); origen = null; }
     });
   })();
 
